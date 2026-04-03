@@ -67,7 +67,7 @@ export default function SymptomsScreen() {
         <h2 style={{ fontSize: '22px', fontWeight: '800', color: '#0D47A1' }}>
           What do you feel? 😔
         </h2>
-        <p style={{ fontSize: '15px', color: '#555', marginTop: '4px' }}>
+        <p style={{ fontSize: '16px', color: '#555', marginTop: '6px', lineHeight: '1.5' }}>
           Tap everything that feels right. You can choose more than one.
         </p>
       </div>

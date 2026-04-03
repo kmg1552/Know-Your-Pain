@@ -46,16 +46,16 @@ export default function PainScaleScreen() {
           <h2 style={{ fontSize: '22px', fontWeight: '800', color: '#0D47A1' }}>
             How bad is it? 🌡️
           </h2>
-          <p style={{ fontSize: '15px', color: '#555', marginTop: '4px' }}>
+          <p style={{ fontSize: '16px', color: '#555', marginTop: '6px', lineHeight: '1.5' }}>
             1 means a tiny bit of pain. 10 means the worst pain ever.
           </p>
         </div>
 
         {/* Pain scale buttons */}
         <div style={{
-          display: 'flex',
-          gap: '4px',
-          justifyContent: 'center',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(5, 1fr)',
+          gap: '8px',
           marginBottom: '8px',
         }}>
           {PAIN_LEVELS.map(({ value, emoji }) => {
@@ -65,28 +65,28 @@ export default function PainScaleScreen() {
                 key={value}
                 onClick={() => setPainScale(value)}
                 style={{
-                  flex: 1,
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  padding: '6px 2px',
-                  borderRadius: '10px',
-                  border: isSelected ? '2px solid #1565C0' : '2px solid #E2E8F0',
+                  padding: '12px 4px',
+                  minHeight: '72px',
+                  borderRadius: '12px',
+                  border: isSelected ? '3px solid #1565C0' : '2px solid #E2E8F0',
                   backgroundColor: isSelected ? '#EFF6FF' : '#fff',
                   cursor: 'pointer',
-                  transform: isSelected ? 'scale(1.1)' : 'scale(1)',
+                  transform: isSelected ? 'scale(1.08)' : 'scale(1)',
                   transition: 'all 0.15s ease',
                   zIndex: isSelected ? 1 : 0,
-                  boxShadow: isSelected ? '0 2px 8px rgba(21,101,192,0.25)' : 'none',
+                  boxShadow: isSelected ? '0 4px 12px rgba(21,101,192,0.3)' : '0 1px 3px rgba(0,0,0,0.06)',
                 }}
               >
-                <span style={{ fontSize: '20px', lineHeight: 1 }}>{emoji}</span>
+                <span style={{ fontSize: '28px', lineHeight: 1 }}>{emoji}</span>
                 <span style={{
-                  fontSize: '11px',
-                  fontWeight: '700',
+                  fontSize: '14px',
+                  fontWeight: '800',
                   color: isSelected ? '#1565C0' : '#555',
-                  marginTop: '3px',
+                  marginTop: '4px',
                 }}>
                   {value}
                 </span>
@@ -100,10 +100,10 @@ export default function PainScaleScreen() {
           display: 'flex',
           justifyContent: 'space-between',
           marginBottom: '24px',
-          padding: '0 2px',
+          padding: '4px 2px 0',
         }}>
-          <span style={{ fontSize: '13px', color: '#888' }}>😊 No pain</span>
-          <span style={{ fontSize: '13px', color: '#888' }}>Worst pain 😭</span>
+          <span style={{ fontSize: '14px', color: '#888', fontWeight: '600' }}>😊 No pain</span>
+          <span style={{ fontSize: '14px', color: '#888', fontWeight: '600' }}>Worst pain 😭</span>
         </div>
 
         {/* Selected result card */}

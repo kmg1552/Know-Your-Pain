@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+function formatSymptomId(id) {
+  return id.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+}
+
 function loadResults() {
   try {
     return JSON.parse(localStorage.getItem('kyp_results') || '[]');
@@ -33,8 +37,8 @@ function ResultCard({ record }) {
       </p>
 
       {/* Body area */}
-      <p style={{ fontSize: '15px', fontWeight: '700', color: '#1a1a1a', margin: 0 }}>
-        📍 {record.bodyLabel}{record.zoomLabel ? ` / ${record.zoomLabel}` : ''}
+      <p style={{ fontSize: '16px', fontWeight: '700', color: '#1a1a1a', margin: 0 }}>
+        📍 {record.bodyLabel}{record.zoomLabel ? ` › ${record.zoomLabel}` : ''}
       </p>
 
       {/* Pain level badge */}
@@ -43,8 +47,8 @@ function ResultCard({ record }) {
           backgroundColor: '#EFF6FF',
           color: '#1565C0',
           borderRadius: '20px',
-          padding: '4px 12px',
-          fontSize: '14px',
+          padding: '5px 14px',
+          fontSize: '15px',
           fontWeight: '700',
         }}>
           {record.painEmoji} Pain level: {record.painScale}/10
@@ -59,11 +63,11 @@ function ResultCard({ record }) {
               backgroundColor: '#F1F5F9',
               color: '#475569',
               borderRadius: '20px',
-              padding: '3px 10px',
-              fontSize: '12px',
+              padding: '4px 10px',
+              fontSize: '13px',
               fontWeight: '600',
             }}>
-              {s}
+              {formatSymptomId(s)}
             </span>
           ))}
           {hasMore && (

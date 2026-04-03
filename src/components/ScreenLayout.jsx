@@ -24,13 +24,13 @@ export default function ScreenLayout({
           top: 0,
           zIndex: 10,
           backgroundColor: '#1565C0',
-          padding: '12px 16px',
+          padding: '14px 16px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
         }}
       >
-        <span style={{ fontWeight: 'bold', color: '#fff', fontSize: '18px' }}>
+        <span style={{ fontWeight: '800', color: '#fff', fontSize: '18px' }}>
           Know Your Pain 💊
         </span>
         {showResultsButton && (
@@ -39,12 +39,12 @@ export default function ScreenLayout({
             style={{
               backgroundColor: 'rgba(255,255,255,0.2)',
               color: '#fff',
-              border: 'none',
+              border: '2px solid rgba(255,255,255,0.4)',
               borderRadius: '8px',
               padding: '6px 12px',
               cursor: 'pointer',
               fontSize: '14px',
-              fontWeight: '600',
+              fontWeight: '700',
             }}
           >
             My Results 📋
@@ -54,23 +54,20 @@ export default function ScreenLayout({
 
       {/* Progress bar */}
       {currentStep > 0 && (
-        <div
-          style={{
-            backgroundColor: 'rgba(255,255,255,0.4)',
-            padding: '6px 16px 8px',
-            backgroundColor: '#1565C0',
-          }}
-        >
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '4px' }}>
-            <span style={{ fontSize: '12px', color: '#fff' }}>
+        <div style={{ backgroundColor: '#1565C0', padding: '6px 16px 10px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px', alignItems: 'center' }}>
+            <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', fontWeight: '600' }}>
               Step {currentStep} of {totalSteps}
+            </span>
+            <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', fontWeight: '600' }}>
+              {Math.round(progressPercent)}%
             </span>
           </div>
           <div
             style={{
               height: '8px',
               borderRadius: '4px',
-              backgroundColor: 'rgba(255,255,255,0.3)',
+              backgroundColor: 'rgba(255,255,255,0.25)',
               overflow: 'hidden',
             }}
           >
@@ -80,7 +77,7 @@ export default function ScreenLayout({
                 width: `${progressPercent}%`,
                 backgroundColor: '#FFD54F',
                 borderRadius: '4px',
-                transition: 'width 0.3s ease',
+                transition: 'width 0.35s ease',
               }}
             />
           </div>
@@ -88,7 +85,12 @@ export default function ScreenLayout({
       )}
 
       {/* Scrollable content */}
-      <main style={{ flex: 1, overflowY: 'auto', padding: '16px' }}>
+      <main style={{
+        flex: 1,
+        overflowY: 'auto',
+        WebkitOverflowScrolling: 'touch',
+        padding: '16px',
+      }}>
         {children}
       </main>
 
@@ -109,13 +111,14 @@ export default function ScreenLayout({
             onClick={onBack}
             style={{
               flex: 1,
-              padding: '14px',
+              padding: '16px 12px',
+              minHeight: '54px',
               borderRadius: '12px',
               border: 'none',
-              backgroundColor: '#e0e0e0',
+              backgroundColor: '#ECEFF1',
               color: '#333',
               fontSize: '16px',
-              fontWeight: '600',
+              fontWeight: '700',
               cursor: 'pointer',
             }}
           >
@@ -126,13 +129,14 @@ export default function ScreenLayout({
             disabled={nextDisabled}
             style={{
               flex: 2,
-              padding: '14px',
+              padding: '16px 12px',
+              minHeight: '54px',
               borderRadius: '12px',
               border: 'none',
               backgroundColor: nextDisabled ? '#90CAF9' : '#1565C0',
               color: '#fff',
-              fontSize: '16px',
-              fontWeight: 'bold',
+              fontSize: '17px',
+              fontWeight: '800',
               cursor: nextDisabled ? 'not-allowed' : 'pointer',
               transition: 'background-color 0.2s ease',
             }}

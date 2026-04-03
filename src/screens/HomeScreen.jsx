@@ -4,8 +4,12 @@ import { useNavigate } from 'react-router-dom';
 const floatKeyframes = `
   @keyframes float {
     0%   { transform: translateY(0px); }
-    50%  { transform: translateY(-14px); }
+    50%  { transform: translateY(-12px); }
     100% { transform: translateY(0px); }
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 6px 20px rgba(0,0,0,0.3), 0 0 0 0 rgba(255,213,79,0.5); }
+    50%       { box-shadow: 0 6px 20px rgba(0,0,0,0.3), 0 0 0 14px rgba(255,213,79,0); }
   }
 `;
 
@@ -119,12 +123,13 @@ export default function HomeScreen() {
               color: '#0D47A1',
               border: 'none',
               borderRadius: '50px',
-              padding: '20px 60px',
-              fontSize: '22px',
+              padding: '22px 64px',
+              fontSize: '24px',
               fontWeight: '900',
               cursor: 'pointer',
-              boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
+              animation: 'pulse 2.4s ease-in-out infinite',
               marginTop: '8px',
+              letterSpacing: '0.5px',
             }}
           >
             ▶ Start
