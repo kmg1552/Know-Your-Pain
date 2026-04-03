@@ -66,6 +66,7 @@ export default function HomeScreen() {
             textAlign: 'center',
             padding: '0 24px',
             gap: '20px',
+            overflowY: 'auto',
           }}
         >
           {/* Floating pill emoji */}
@@ -134,6 +135,29 @@ export default function HomeScreen() {
           >
             ▶ Start
           </button>
+
+          {/* Legal disclaimer */}
+          <hr style={{
+            border: "none",
+            borderTop: "1px solid rgba(255,255,255,0.12)",
+            width: "80%",
+            margin: "20px auto 0 auto",
+          }} />
+          <p
+            style={{
+              fontSize: "11px",
+              color: "rgba(255, 255, 255, 0.50)",
+              textAlign: "center",
+              lineHeight: "1.6",
+              maxWidth: "340px",
+              margin: "16px auto 0 auto",
+              padding: "0 24px",
+              fontWeight: "400",
+              letterSpacing: "0.1px",
+            }}
+          >
+            This tool is intended to assist in identifying symptoms and providing temporary relief options only. It does not constitute medical advice, diagnosis, or prescription. Always consult a pharmacist or doctor before taking any medication. The developers accept no liability for any outcomes resulting from the use of this tool.
+          </p>
         </div>
 
         {/* Bottom disclaimer */}
