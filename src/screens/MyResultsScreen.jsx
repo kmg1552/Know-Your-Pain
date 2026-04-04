@@ -1,9 +1,24 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import symptomData from '../data/symptomData';
 
-function formatSymptomId(id) {
-  return id.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+function buildSymptomLabelMap() {
+  const map = {};
+  Object.values(symptomData).forEach(bodyPart => {
+    Object.values(bodyPart).forEach(symptomArray => {
+      if (Array.isArray(symptomArray)) {
+        symptomArray.forEach(symptom => {
+          if (symptom.id && symptom.label) {
+            map[symptom.id] = symptom.label;
+          }
+        });
+      }
+    });
+  });
+  return map;
 }
+
+const symptomLabelMap = buildSymptomLabelMap();
 
 function loadResults() {
   try {
@@ -67,7 +82,7 @@ function ResultCard({ record }) {
               fontSize: '13px',
               fontWeight: '600',
             }}>
-              {formatSymptomId(s)}
+              {symptomLabelMap[s] || s}
             </span>
           ))}
           {hasMore && (
