@@ -37,7 +37,7 @@ export default function PainScaleScreen() {
         currentStep={4}
         totalSteps={5}
         onBack={() => navigate('/symptoms')}
-        onNext={() => navigate('/recommendation')}
+        onNext={() => navigate('/positive-reinforcement')}
         nextLabel="See Result →"
         nextDisabled={painScale === null}
       >

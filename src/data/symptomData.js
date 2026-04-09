@@ -7,14 +7,14 @@
 // image: path to cartoon illustration — falls back to icon (emoji) if file not found.
 
 const universalCarerSymptoms = [
-  { id: 'carer-irritable',        icon: '😤',  image: '/images/symptoms/carer-irritable.png',        label: 'More irritable or upset than usual'       },
-  { id: 'carer-crying',           icon: '😭',  image: '/images/symptoms/carer-crying.png',           label: 'Crying more than usual'                   },
-  { id: 'carer-quiet',            icon: '🤫',  image: '/images/symptoms/carer-quiet.png',            label: 'Unusually quiet or withdrawn'             },
-  { id: 'carer-refusing-activity',icon: '🚫',  image: '/images/symptoms/carer-refusing-activity.png',label: 'Refusing usual activities'                },
-  { id: 'carer-no-eat',           icon: '🍽️',  image: '/images/symptoms/carer-no-eat.png',           label: 'Refusing to eat or drink'                 },
-  { id: 'carer-vomiting',         icon: '🤮',  image: '/images/symptoms/carer-vomiting.png',         label: 'Vomiting'                                 },
-  { id: 'carer-fever',            icon: '🌡️',  image: '/images/symptoms/carer-fever.png',            label: 'Feels hot to touch'                       },
-  { id: 'carer-pale',             icon: '😨',  image: '/images/symptoms/carer-pale.png',             label: 'Looks pale or flushed'                    },
+  { id: 'carer-irritable',        icon: '😤',  image: '/images/symptoms/carer-irritable.PNG',        label: 'More irritable or upset than usual'       },
+  { id: 'carer-crying',           icon: '😭',  image: '/images/symptoms/carer-crying.PNG',           label: 'Crying more than usual'                   },
+  { id: 'carer-quiet',            icon: '🤫',  image: '/images/symptoms/carer-quiet.PNG',            label: 'Unusually quiet or withdrawn'             },
+  { id: 'carer-refusing-activity',icon: '🚫',  image: '/images/symptoms/carer-refusing-activity.PNG',label: 'Refusing usual activities'                },
+  { id: 'carer-no-eat',           icon: '🍽️',  image: '/images/symptoms/carer-no-eat.PNG',           label: 'Refusing to eat or drink'                 },
+  { id: 'carer-vomiting',         icon: '🤮',  image: '/images/symptoms/carer-vomiting.PNG',         label: 'Vomiting'                                 },
+  { id: 'carer-fever',            icon: '🌡️',  image: '/images/symptoms/carer-fever.PNG',            label: 'Feels hot to touch'                       },
+  { id: 'carer-pale',             icon: '😨',  image: '/images/symptoms/carer-pale.PNG',             label: 'Looks pale or flushed'                    },
   { id: 'carer-sweating',         icon: '💧',  image: '/images/symptoms/carer-sweating.png',         label: 'Sweating more than usual'                 },
   { id: 'carer-grimacing',        icon: '😣',  image: '/images/symptoms/carer-grimacing.png',        label: 'Facial grimacing'                         },
   { id: 'carer-guarding',         icon: '🤲',  image: '/images/symptoms/carer-guarding.png',         label: 'Protecting or guarding an area'           },
@@ -29,6 +29,28 @@ export default {
 
   // ── FRONT HEAD ──
   head: {
+    // Zoom sub-areas for head zoom image
+    eyes: [
+      { id: 'eye-hurts', icon: '👁️', image: '/images/symptoms/eye-hurts.png', label: 'My eye hurts'       },
+      { id: 'light',     icon: '🌟', image: '/images/symptoms/light.png',     label: 'Light hurts my eye'  },
+      { id: 'blurry',    icon: '😵', image: '/images/symptoms/blurry.png',    label: 'Things look blurry'  },
+      { id: 'watery',    icon: '💧', image: '/images/symptoms/watery.png',    label: 'My eye is watery'    },
+      { id: 'carer-sensitive-light', icon: '🌟', image: '/images/symptoms/carer-sensitive-light.png', label: 'Sensitive to light' },
+      ...universalCarerSymptoms,
+    ],
+    mouth: [
+      { id: 'tooth',  icon: '🦷', image: '/images/symptoms/tooth.png',  label: 'My tooth hurts' },
+      { id: 'jaw',    icon: '😣', image: '/images/symptoms/jaw.png',    label: 'My jaw hurts'   },
+      { id: 'throat', icon: '🤒', image: '/images/symptoms/throat.png', label: 'Sore throat'    },
+      ...universalCarerSymptoms,
+    ],
+    ears: [
+      { id: 'ear-inside', icon: '😣', image: '/images/symptoms/ear-inside.png', label: 'My ear hurts inside' },
+      { id: 'ringing',    icon: '🔔', image: '/images/symptoms/ringing.png',    label: 'I hear ringing'      },
+      { id: 'cant-hear',  icon: '🔇', image: '/images/symptoms/cant-hear.png',  label: "I can't hear well"   },
+      { id: 'carer-pulling-ear', icon: '👂', image: '/images/symptoms/carer-pulling-ear.png', label: 'Pulling or touching their ear' },
+      ...universalCarerSymptoms,
+    ],
     forehead: [
       { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing / pounding' },
       { id: 'pressure',  icon: '🤜', image: '/images/symptoms/pressure.png',  label: 'Feels like pressure'  },
@@ -151,6 +173,27 @@ export default {
 
   // ── CHEST ──
   chest: {
+    // Zoom sub-areas for chest zoom image
+    lungs: [
+      { id: 'sharp',   icon: '⚡',  image: '/images/symptoms/sharp.png',   label: 'Sharp pain'                   },
+      { id: 'tight',   icon: '🤜',  image: '/images/symptoms/tight.png',   label: 'Tight / hard to breathe'      },
+      { id: 'burning', icon: '🔥',  image: '/images/symptoms/burning.png', label: 'Burning feeling'              },
+      { id: 'carer-coughing',        icon: '😮‍💨', image: '/images/symptoms/carer-coughing.png',        label: 'Coughing more than usual'             },
+      { id: 'carer-breathing-fast',  icon: '💨',  image: '/images/symptoms/carer-breathing-fast.png',  label: 'Breathing faster than usual'          },
+      { id: 'carer-breathing-noisy', icon: '🔊',  image: '/images/symptoms/carer-breathing-noisy.png', label: 'Breathing noisily or with difficulty'  },
+      ...universalCarerSymptoms,
+    ],
+    heart: [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain'              },
+      { id: 'tight',     icon: '🤜', image: '/images/symptoms/tight.png',     label: 'Tight / pressing feeling' },
+      { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing / pounding'    },
+      { id: 'burning',              icon: '🔥',  image: '/images/symptoms/burning.png',              label: 'Burning feeling'                      },
+      { id: 'carer-rubbing-chest',  icon: '✋',  image: '/images/symptoms/carer-rubbing-chest.png',  label: 'Rubbing their chest'                  },
+      { id: 'carer-coughing',       icon: '😮‍💨', image: '/images/symptoms/carer-coughing.png',       label: 'Coughing more than usual'             },
+      { id: 'carer-breathing-fast', icon: '💨',  image: '/images/symptoms/carer-breathing-fast.png', label: 'Breathing faster than usual'          },
+      { id: 'carer-breathing-noisy',icon: '🔊',  image: '/images/symptoms/carer-breathing-noisy.png',label: 'Breathing noisily or with difficulty'  },
+      ...universalCarerSymptoms,
+    ],
     'chest-centre': [
       { id: 'burning', icon: '🔥', image: '/images/symptoms/burning.png', label: 'Burning feeling'         },
       { id: 'tight',   icon: '🤜', image: '/images/symptoms/tight.png',   label: 'Tight / hard to breathe' },
@@ -274,8 +317,53 @@ export default {
     ],
   },
 
+  // ── CHEST (zoom sub-areas) ──
+  // lungs and heart are new IDs from the chest zoom image
+  // These are added alongside existing chest-centre/chest-left/chest-right entries above.
+
   // ── ARMS ──
   'left-arm': {
+    // Zoom sub-areas for arm zoom image
+    'upper-arm': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'  },
+      { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing'  },
+      { id: 'carer-not-using-arm', icon: '💪', image: '/images/symptoms/carer-not-using-arm.png', label: 'Not using their arm as usual' },
+      { id: 'carer-swelling-arm',  icon: '💪', image: '/images/symptoms/carer-swelling-arm.png',  label: 'Swelling visible on arm'      },
+      ...universalCarerSymptoms,
+    ],
+    'lower-arm': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'  },
+      { id: 'burning',   icon: '🔥', image: '/images/symptoms/burning.png',   label: 'Burning'    },
+      { id: 'carer-not-using-arm', icon: '💪', image: '/images/symptoms/carer-not-using-arm.png', label: 'Not using their arm as usual' },
+      { id: 'carer-swelling-arm',  icon: '💪', image: '/images/symptoms/carer-swelling-arm.png',  label: 'Swelling visible on arm'      },
+      ...universalCarerSymptoms,
+    ],
+    'wrist': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain'      },
+      { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'       },
+      { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing'       },
+      { id: 'carer-swelling-arm',  icon: '💪', image: '/images/symptoms/carer-swelling-arm.png',  label: 'Swelling visible'        },
+      { id: 'carer-not-using-arm', icon: '💪', image: '/images/symptoms/carer-not-using-arm.png', label: 'Not using their arm'     },
+      ...universalCarerSymptoms,
+    ],
+    'hand': [
+      { id: 'sharp',   icon: '⚡', image: '/images/symptoms/sharp.png',   label: 'Sharp pain'  },
+      { id: 'dull',    icon: '😞', image: '/images/symptoms/dull.png',    label: 'Dull ache'   },
+      { id: 'burning', icon: '🔥', image: '/images/symptoms/burning.png', label: 'Burning'     },
+      { id: 'carer-swelling-arm',  icon: '💪', image: '/images/symptoms/carer-swelling-arm.png',  label: 'Swelling visible'    },
+      { id: 'carer-not-using-arm', icon: '💪', image: '/images/symptoms/carer-not-using-arm.png', label: 'Not using their hand' },
+      ...universalCarerSymptoms,
+    ],
+    'fingers': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing'  },
+      { id: 'burning',   icon: '🔥', image: '/images/symptoms/burning.png',   label: 'Burning'    },
+      { id: 'carer-swelling-arm',  icon: '💪', image: '/images/symptoms/carer-swelling-arm.png',  label: 'Swelling visible'      },
+      { id: 'carer-not-using-arm', icon: '💪', image: '/images/symptoms/carer-not-using-arm.png', label: 'Not using their fingers' },
+      ...universalCarerSymptoms,
+    ],
     default: [
       { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
       { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'  },
@@ -288,6 +376,46 @@ export default {
     ],
   },
   'right-arm': {
+    'upper-arm': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'  },
+      { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing'  },
+      { id: 'carer-not-using-arm', icon: '💪', image: '/images/symptoms/carer-not-using-arm.png', label: 'Not using their arm as usual' },
+      { id: 'carer-swelling-arm',  icon: '💪', image: '/images/symptoms/carer-swelling-arm.png',  label: 'Swelling visible on arm'      },
+      ...universalCarerSymptoms,
+    ],
+    'lower-arm': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'  },
+      { id: 'burning',   icon: '🔥', image: '/images/symptoms/burning.png',   label: 'Burning'    },
+      { id: 'carer-not-using-arm', icon: '💪', image: '/images/symptoms/carer-not-using-arm.png', label: 'Not using their arm as usual' },
+      { id: 'carer-swelling-arm',  icon: '💪', image: '/images/symptoms/carer-swelling-arm.png',  label: 'Swelling visible on arm'      },
+      ...universalCarerSymptoms,
+    ],
+    'wrist': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain'      },
+      { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'       },
+      { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing'       },
+      { id: 'carer-swelling-arm',  icon: '💪', image: '/images/symptoms/carer-swelling-arm.png',  label: 'Swelling visible'        },
+      { id: 'carer-not-using-arm', icon: '💪', image: '/images/symptoms/carer-not-using-arm.png', label: 'Not using their arm'     },
+      ...universalCarerSymptoms,
+    ],
+    'hand': [
+      { id: 'sharp',   icon: '⚡', image: '/images/symptoms/sharp.png',   label: 'Sharp pain'  },
+      { id: 'dull',    icon: '😞', image: '/images/symptoms/dull.png',    label: 'Dull ache'   },
+      { id: 'burning', icon: '🔥', image: '/images/symptoms/burning.png', label: 'Burning'     },
+      { id: 'carer-swelling-arm',  icon: '💪', image: '/images/symptoms/carer-swelling-arm.png',  label: 'Swelling visible'    },
+      { id: 'carer-not-using-arm', icon: '💪', image: '/images/symptoms/carer-not-using-arm.png', label: 'Not using their hand' },
+      ...universalCarerSymptoms,
+    ],
+    'fingers': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing'  },
+      { id: 'burning',   icon: '🔥', image: '/images/symptoms/burning.png',   label: 'Burning'    },
+      { id: 'carer-swelling-arm',  icon: '💪', image: '/images/symptoms/carer-swelling-arm.png',  label: 'Swelling visible'      },
+      { id: 'carer-not-using-arm', icon: '💪', image: '/images/symptoms/carer-not-using-arm.png', label: 'Not using their fingers' },
+      ...universalCarerSymptoms,
+    ],
     default: [
       { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
       { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'  },
@@ -302,6 +430,48 @@ export default {
 
   // ── LEGS ──
   'left-leg': {
+    // Zoom sub-areas for leg zoom image
+    'upper-leg': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'  },
+      { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing'  },
+      { id: 'cramp',     icon: '😖', image: '/images/symptoms/cramp.png',     label: 'Cramping'   },
+      { id: 'carer-limping',     icon: '🦵', image: '/images/symptoms/carer-limping.png',     label: 'Limping or walking differently' },
+      { id: 'carer-swelling-leg',icon: '🦵', image: '/images/symptoms/carer-swelling-leg.png',label: 'Swelling visible'               },
+      ...universalCarerSymptoms,
+    ],
+    'lower-leg': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'  },
+      { id: 'cramp',     icon: '😖', image: '/images/symptoms/cramp.png',     label: 'Cramping'   },
+      { id: 'burning',   icon: '🔥', image: '/images/symptoms/burning.png',   label: 'Burning'    },
+      { id: 'carer-limping',     icon: '🦵', image: '/images/symptoms/carer-limping.png',     label: 'Limping or walking differently' },
+      { id: 'carer-swelling-leg',icon: '🦵', image: '/images/symptoms/carer-swelling-leg.png',label: 'Swelling visible'               },
+      ...universalCarerSymptoms,
+    ],
+    'ankle': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing'  },
+      { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'  },
+      { id: 'carer-swelling-leg',icon: '🦵', image: '/images/symptoms/carer-swelling-leg.png',label: 'Swelling visible'               },
+      { id: 'carer-limping',     icon: '🦵', image: '/images/symptoms/carer-limping.png',     label: 'Limping or walking differently' },
+      ...universalCarerSymptoms,
+    ],
+    'feet': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing'  },
+      { id: 'burning',   icon: '🔥', image: '/images/symptoms/burning.png',   label: 'Burning'    },
+      { id: 'carer-limping',     icon: '🦵', image: '/images/symptoms/carer-limping.png',     label: 'Limping or walking differently' },
+      { id: 'carer-swelling-leg',icon: '🦵', image: '/images/symptoms/carer-swelling-leg.png',label: 'Swelling visible'               },
+      ...universalCarerSymptoms,
+    ],
+    'toes': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing'  },
+      { id: 'burning',   icon: '🔥', image: '/images/symptoms/burning.png',   label: 'Burning'    },
+      { id: 'carer-swelling-leg',icon: '🦵', image: '/images/symptoms/carer-swelling-leg.png',label: 'Swelling visible' },
+      ...universalCarerSymptoms,
+    ],
     default: [
       { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
       { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'  },
@@ -315,6 +485,47 @@ export default {
     ],
   },
   'right-leg': {
+    'upper-leg': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'  },
+      { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing'  },
+      { id: 'cramp',     icon: '😖', image: '/images/symptoms/cramp.png',     label: 'Cramping'   },
+      { id: 'carer-limping',     icon: '🦵', image: '/images/symptoms/carer-limping.png',     label: 'Limping or walking differently' },
+      { id: 'carer-swelling-leg',icon: '🦵', image: '/images/symptoms/carer-swelling-leg.png',label: 'Swelling visible'               },
+      ...universalCarerSymptoms,
+    ],
+    'lower-leg': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'  },
+      { id: 'cramp',     icon: '😖', image: '/images/symptoms/cramp.png',     label: 'Cramping'   },
+      { id: 'burning',   icon: '🔥', image: '/images/symptoms/burning.png',   label: 'Burning'    },
+      { id: 'carer-limping',     icon: '🦵', image: '/images/symptoms/carer-limping.png',     label: 'Limping or walking differently' },
+      { id: 'carer-swelling-leg',icon: '🦵', image: '/images/symptoms/carer-swelling-leg.png',label: 'Swelling visible'               },
+      ...universalCarerSymptoms,
+    ],
+    'ankle': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing'  },
+      { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'  },
+      { id: 'carer-swelling-leg',icon: '🦵', image: '/images/symptoms/carer-swelling-leg.png',label: 'Swelling visible'               },
+      { id: 'carer-limping',     icon: '🦵', image: '/images/symptoms/carer-limping.png',     label: 'Limping or walking differently' },
+      ...universalCarerSymptoms,
+    ],
+    'feet': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing'  },
+      { id: 'burning',   icon: '🔥', image: '/images/symptoms/burning.png',   label: 'Burning'    },
+      { id: 'carer-limping',     icon: '🦵', image: '/images/symptoms/carer-limping.png',     label: 'Limping or walking differently' },
+      { id: 'carer-swelling-leg',icon: '🦵', image: '/images/symptoms/carer-swelling-leg.png',label: 'Swelling visible'               },
+      ...universalCarerSymptoms,
+    ],
+    'toes': [
+      { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
+      { id: 'throbbing', icon: '💗', image: '/images/symptoms/throbbing.png', label: 'Throbbing'  },
+      { id: 'burning',   icon: '🔥', image: '/images/symptoms/burning.png',   label: 'Burning'    },
+      { id: 'carer-swelling-leg',icon: '🦵', image: '/images/symptoms/carer-swelling-leg.png',label: 'Swelling visible' },
+      ...universalCarerSymptoms,
+    ],
     default: [
       { id: 'sharp',     icon: '⚡', image: '/images/symptoms/sharp.png',     label: 'Sharp pain' },
       { id: 'dull',      icon: '😞', image: '/images/symptoms/dull.png',      label: 'Dull ache'  },

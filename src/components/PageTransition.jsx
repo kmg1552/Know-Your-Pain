@@ -8,6 +8,7 @@ const ROUTE_ORDER = [
   '/body-zoom',
   '/symptoms',
   '/pain-scale',
+  '/positive-reinforcement',
   '/recommendation',
   '/my-results',
 ];

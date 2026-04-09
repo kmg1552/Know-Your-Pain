@@ -7,6 +7,7 @@ import BodyZoomScreen from './screens/BodyZoomScreen';
 import SymptomsScreen from './screens/SymptomsScreen';
 import PainScaleScreen from './screens/PainScaleScreen';
 import RecommendationScreen from './screens/RecommendationScreen';
+import PositiveReinforcementScreen from './screens/PositiveReinforcementScreen';
 import MyResultsScreen from './screens/MyResultsScreen';
 
 function AnimatedRoutes() {
@@ -19,6 +20,7 @@ function AnimatedRoutes() {
         <Route path="/body-zoom" element={<BodyZoomScreen />} />
         <Route path="/symptoms" element={<SymptomsScreen />} />
         <Route path="/pain-scale" element={<PainScaleScreen />} />
+        <Route path="/positive-reinforcement" element={<PositiveReinforcementScreen />} />
         <Route path="/recommendation" element={<RecommendationScreen />} />
         <Route path="/my-results" element={<MyResultsScreen />} />
       </Routes>

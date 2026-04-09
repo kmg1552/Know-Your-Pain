@@ -15,98 +15,31 @@ const cssKeyframes = `
 `;
 
 // ─────────────────────────────────────────────────────────────
-// BODY SHAPES — SVG viewBox "0 0 100 100" (percentage coords)
-// Each shape has a glowCenter {x, y} used to position the glow.
-// type: "ellipse" | "rect"
+// HOTSPOT DATA — percentage-based, relative to image container.
+// All hotspots are circular (border-radius: 50%).
+// Adjust top/left/width/height strings to fine-tune positions.
 // ─────────────────────────────────────────────────────────────
 
 const FRONT_SHAPES = [
-  // ← ADJUST: Head ellipse
-  { part: 'head',          label: 'Head',          type: 'ellipse',
-    cx: 50, cy: 11, rx: 9, ry: 9,
-    glowCenter: { x: 50, y: 11 }, glowSize: 60 },
-
-  // ← ADJUST: Neck
-  { part: 'neck',          label: 'Neck / Throat', type: 'rect',
-    x: 44, y: 20, w: 12, h: 4,
-    glowCenter: { x: 50, y: 22 }, glowSize: 38 },
-
-  // ← ADJUST: Chest
-  { part: 'chest',         label: 'Chest',         type: 'rect',
-    x: 40, y: 24, w: 20, h: 8,
-    glowCenter: { x: 50, y: 28 }, glowSize: 55 },
-
-  // ← ADJUST: Upper Tummy
-  { part: 'upper-abdomen', label: 'Upper Tummy',   type: 'rect',
-    x: 40, y: 32, w: 20, h: 11,
-    glowCenter: { x: 50, y: 37 }, glowSize: 52 },
-
-  // ← ADJUST: Lower Tummy
-  { part: 'lower-abdomen', label: 'Lower Tummy',   type: 'rect',
-    x: 41, y: 43, w: 18, h: 11,
-    glowCenter: { x: 50, y: 48 }, glowSize: 50 },
-
-  // ← ADJUST: Left Arm
-  { part: 'left-arm',      label: 'Left Arm',      type: 'rect',
-    x: 28, y: 22, w: 12, h: 30,
-    glowCenter: { x: 34, y: 37 }, glowSize: 42 },
-
-  // ← ADJUST: Right Arm
-  { part: 'right-arm',     label: 'Right Arm',     type: 'rect',
-    x: 60, y: 22, w: 12, h: 30,
-    glowCenter: { x: 66, y: 37 }, glowSize: 42 },
-
-  // ← ADJUST: Left Leg
-  { part: 'left-leg',      label: 'Left Leg',      type: 'rect',
-    x: 36, y: 54, w: 14, h: 43,
-    glowCenter: { x: 43, y: 75 }, glowSize: 52 },
-
-  // ← ADJUST: Right Leg
-  { part: 'right-leg',     label: 'Right Leg',     type: 'rect',
-    x: 50, y: 54, w: 14, h: 43,
-    glowCenter: { x: 57, y: 75 }, glowSize: 52 },
+  { part: 'head',          label: 'Head',          top: '15.4%', left: '44.5%', width: '12%', height: '12%' },
+  { part: 'neck',          label: 'Neck / Throat', top: '28.0%', left: '45.2%', width: '8%',  height: '8%'  },
+  { part: 'chest',         label: 'Chest',         top: '32.0%', left: '42.7%', width: '14%', height: '14%' },
+  { part: 'left-arm',      label: 'Left Arm',      top: '42.4%', left: '20.8%', width: '10%', height: '10%' },
+  { part: 'right-arm',     label: 'Right Arm',     top: '42.4%', left: '68.5%', width: '10%', height: '10%' },
+  { part: 'upper-abdomen', label: 'Upper Tummy',   top: '47.3%', left: '43.9%', width: '12%', height: '12%' },
+  { part: 'lower-abdomen', label: 'Lower Tummy',   top: '53.7%', left: '43.9%', width: '12%', height: '12%' },
+  { part: 'left-leg',      label: 'Left Leg',      top: '72.3%', left: '30.5%', width: '12%', height: '12%' },
+  { part: 'right-leg',     label: 'Right Leg',     top: '72.3%', left: '56.6%', width: '12%', height: '12%' },
 ];
 
 const BACK_SHAPES = [
-  // ← ADJUST: Head ellipse (back)
-  { part: 'head-back',     label: 'Head',          type: 'ellipse',
-    cx: 50, cy: 11, rx: 9, ry: 9,
-    glowCenter: { x: 50, y: 11 }, glowSize: 60 },
-
-  // ← ADJUST: Neck (back)
-  { part: 'neck-back',     label: 'Back of Neck',  type: 'rect',
-    x: 44, y: 20, w: 12, h: 4,
-    glowCenter: { x: 50, y: 22 }, glowSize: 38 },
-
-  // ← ADJUST: Upper Back
-  { part: 'upper-back',    label: 'Upper Back',    type: 'rect',
-    x: 40, y: 22, w: 20, h: 16,
-    glowCenter: { x: 50, y: 30 }, glowSize: 60 },
-
-  // ← ADJUST: Lower Back
-  { part: 'lower-back',    label: 'Lower Back',    type: 'rect',
-    x: 40, y: 38, w: 20, h: 15,
-    glowCenter: { x: 50, y: 45 }, glowSize: 55 },
-
-  // ← ADJUST: Left Arm (back)
-  { part: 'left-arm-back', label: 'Left Arm',      type: 'rect',
-    x: 28, y: 22, w: 12, h: 30,
-    glowCenter: { x: 34, y: 37 }, glowSize: 42 },
-
-  // ← ADJUST: Right Arm (back)
-  { part: 'right-arm-back',label: 'Right Arm',     type: 'rect',
-    x: 60, y: 22, w: 12, h: 30,
-    glowCenter: { x: 66, y: 37 }, glowSize: 42 },
-
-  // ← ADJUST: Left Leg (back)
-  { part: 'left-leg-back', label: 'Left Leg',      type: 'rect',
-    x: 36, y: 53, w: 14, h: 44,
-    glowCenter: { x: 43, y: 75 }, glowSize: 52 },
-
-  // ← ADJUST: Right Leg (back)
-  { part: 'right-leg-back',label: 'Right Leg',     type: 'rect',
-    x: 50, y: 53, w: 14, h: 44,
-    glowCenter: { x: 57, y: 75 }, glowSize: 52 },
+  { part: 'head-back',      label: 'Head',        top: '12.7%', left: '42.8%', width: '12%', height: '12%' },
+  { part: 'upper-back',     label: 'Upper Back',  top: '31.3%', left: '42.0%', width: '14%', height: '14%' },
+  { part: 'lower-back',     label: 'Lower Back',  top: '53.0%', left: '42.0%', width: '14%', height: '14%' },
+  { part: 'left-arm-back',  label: 'Left Arm',    top: '45.3%', left: '24.8%', width: '10%', height: '10%' },
+  { part: 'right-arm-back', label: 'Right Arm',   top: '45.3%', left: '65.0%', width: '10%', height: '10%' },
+  { part: 'left-leg-back',  label: 'Left Leg',    top: '70.4%', left: '34.3%', width: '12%', height: '12%' },
+  { part: 'right-leg-back', label: 'Right Leg',   top: '70.4%', left: '51.3%', width: '12%', height: '12%' },
 ];
 
 const ZOOM_PARTS = ['head', 'head-back', 'chest', 'upper-abdomen', 'lower-abdomen'];
@@ -135,7 +68,7 @@ export default function BodyMapScreen() {
   const { setBodyPart, setZoomPart } = useAppContext();
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
-  const [view, setView]               = useState('front');
+  const [view, setView]                 = useState('front');
   const [selectedPart, setSelectedPart] = useState(null);
   const [hoveredPart, setHoveredPart]   = useState(null);
   const [imgError, setImgError]         = useState(false);
@@ -172,32 +105,12 @@ export default function BodyMapScreen() {
     }
   }
 
-  // Fill/stroke colours per state
-  function shapeStyle(part) {
-    if (selectedPart === part) {
-      return {
-        fill:        'rgba(220,38,38,0.15)',
-        stroke:      'rgba(220,38,38,0.80)',
-        strokeWidth: '0.8',
-      };
-    }
-    if (hoveredPart === part) {
-      return {
-        fill:        'rgba(59,130,246,0.20)',
-        stroke:      'rgba(59,130,246,0.60)',
-        strokeWidth: '0.5',
-      };
-    }
-    return { fill: 'transparent', stroke: 'transparent', strokeWidth: '0' };
+  // Compute glow centre from the selected shape's position data
+  function glowCenter(shape) {
+    const cx = parseFloat(shape.left) + parseFloat(shape.width) / 2;
+    const cy = parseFloat(shape.top)  + parseFloat(shape.height) / 2;
+    return { x: cx, y: cy };
   }
-
-  const sharedSvgProps = (shape) => ({
-    style: { cursor: 'pointer', transition: 'fill 0.2s ease, stroke 0.2s ease' },
-    onClick:      () => handleSelect(shape.part, shape.label),
-    onMouseEnter: () => setHoveredPart(shape.part),
-    onMouseLeave: () => setHoveredPart(null),
-    ...shapeStyle(shape.part),
-  });
 
   return (
     <>
@@ -273,76 +186,77 @@ export default function BodyMapScreen() {
           )}
         </div>
 
-        {/* Body image + SVG overlay */}
-        <div style={{ position: 'relative', width: '100%', backgroundColor: '#FFFFFF', borderRadius: '4px', overflow: 'hidden' }}>
-
+        {/* Body image + hotspot overlay */}
+        <div
+          style={{ position: 'relative', width: '100%', backgroundColor: '#FFFFFF', borderRadius: '4px', overflow: 'hidden' }}
+        >
           {/* Body image (or fallback) */}
           {imgError ? (
             <BodySVGFallback />
           ) : (
             <img
-              src={view === 'front' ? '/images/body-front.png' : '/images/body-back.png'}
+              src={view === 'front' ? '/images/body-front.JPG' : '/images/body-back.jpg'}
               alt={view === 'front' ? 'Front view of human body' : 'Back view of human body'}
               onError={() => setImgError(true)}
               style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'contain' }}
             />
           )}
 
-          {/* SVG hotspot overlay */}
-          <svg
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            style={{
-              position: 'absolute',
-              top: 0, left: 0,
-              width: '100%', height: '100%',
-              overflow: 'visible',
-            }}
-          >
-            {shapes.map((shape) =>
-              shape.type === 'ellipse' ? (
-                <ellipse
-                  key={shape.part}
-                  cx={shape.cx}
-                  cy={shape.cy}
-                  rx={shape.rx}
-                  ry={shape.ry}
-                  {...sharedSvgProps(shape)}
-                />
-              ) : (
-                <rect
-                  key={shape.part}
-                  x={shape.x}
-                  y={shape.y}
-                  width={shape.w}
-                  height={shape.h}
-                  rx="4"
-                  ry="4"
-                  {...sharedSvgProps(shape)}
-                />
-              )
-            )}
-          </svg>
+          {/* Circular hotspot buttons */}
+          {shapes.map((shape) => {
+            const isSelected = selectedPart === shape.part;
+            const isHovered  = hoveredPart  === shape.part;
+            return (
+              <button
+                key={shape.part}
+                onClick={(e) => { e.stopPropagation(); handleSelect(shape.part, shape.label); }}
+                onMouseEnter={() => setHoveredPart(shape.part)}
+                onMouseLeave={() => setHoveredPart(null)}
+                style={{
+                  position:        'absolute',
+                  top:             shape.top,
+                  left:            shape.left,
+                  width:           shape.width,
+                  height:          shape.height,
+                  borderRadius:    '50%',
+                  border:          'none',
+                  backgroundColor: isSelected
+                    ? 'rgba(239, 68, 68, 0.5)'
+                    : isHovered
+                    ? 'rgba(239, 68, 68, 0.3)'
+                    : 'transparent',
+                  cursor:          'pointer',
+                  transition:      'background-color 0.15s ease',
+                  padding:         0,
+                  boxSizing:       'border-box',
+                  zIndex:          2,
+                }}
+              />
+            );
+          })}
 
-          {/* Red glow — positioned using glowCenter percentages */}
-          {selectedShape && (
-            <div
-              key={`glow-${selectedPart}`}
-              style={{
-                position: 'absolute',
-                top:  `${selectedShape.glowCenter.y}%`,
-                left: `${selectedShape.glowCenter.x}%`,
-                width:  `${selectedShape.glowSize}px`,
-                height: `${selectedShape.glowSize}px`,
-                pointerEvents: 'none',
-                borderRadius: '50%',
-                background: 'radial-gradient(circle, rgba(220,38,38,0.85) 0%, rgba(220,38,38,0.55) 30%, rgba(220,38,38,0.25) 60%, transparent 100%)',
-                transform: 'translate(-50%, -50%)',
-                animation: 'glowPulse 1.8s ease-in-out infinite',
-                zIndex: 3,
-              }}
-            />
-          )}
+          {/* Red glow on selected hotspot */}
+          {selectedShape && (() => {
+            const c = glowCenter(selectedShape);
+            return (
+              <div
+                key={`glow-${selectedPart}`}
+                style={{
+                  position:      'absolute',
+                  top:           `${c.y}%`,
+                  left:          `${c.x}%`,
+                  width:         '60px',
+                  height:        '60px',
+                  pointerEvents: 'none',
+                  borderRadius:  '50%',
+                  background:    'radial-gradient(circle, rgba(220,38,38,0.85) 0%, rgba(220,38,38,0.55) 30%, rgba(220,38,38,0.25) 60%, transparent 100%)',
+                  transform:     'translate(-50%, -50%)',
+                  animation:     'glowPulse 1.8s ease-in-out infinite',
+                  zIndex:        3,
+                }}
+              />
+            );
+          })()}
         </div>
       </ScreenLayout>
     </>
