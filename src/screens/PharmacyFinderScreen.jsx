@@ -80,9 +80,13 @@ export default function PharmacyFinderScreen() {
 
   async function fetchPharmacies(lat, lon) {
     try {
-      const res = await fetch(`/api/pharmacy?lat=${lat}&lon=${lon}&radius=5000`);
+      const query = `[out:json][timeout:25];(node["amenity"="pharmacy"](around:5000,${lat},${lon});way["amenity"="pharmacy"](around:5000,${lat},${lon}););out center;`;
+      const res = await fetch('https://overpass-api.de/api/interpreter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'data=' + encodeURIComponent(query),
+      });
       const data = await res.json();
-      if (data.error) throw new Error(data.error);
       const results = (data.elements || [])
         .map((el) => {
           const elLat = el.lat ?? el.center?.lat;
