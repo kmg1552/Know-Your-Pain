@@ -80,21 +80,22 @@ export default function PharmacyFinderScreen() {
 
   async function fetchPharmacies(lat, lon) {
     try {
-      const query = `[out:json][timeout:25];node["amenity"="pharmacy"](around:5000,${lat},${lon});out body;`;
-      const res = await fetch('https://overpass-api.de/api/interpreter', {
-        method: 'POST',
-        body: query,
-      });
+      const res = await fetch(`/api/pharmacy?lat=${lat}&lon=${lon}&radius=5000`);
       const data = await res.json();
+      if (data.error) throw new Error(data.error);
       const results = (data.elements || [])
         .map((el) => {
+          const elLat = el.lat ?? el.center?.lat;
+          const elLon = el.lon ?? el.center?.lon;
+          if (elLat == null || elLon == null) return null;
           const name = el.tags?.name || 'Pharmacy';
           const street = el.tags?.['addr:street'] || '';
           const number = el.tags?.['addr:housenumber'] || '';
           const address = street ? `${number} ${street}`.trim() : null;
-          const distance = haversine(lat, lon, el.lat, el.lon);
-          return { name, address, lat: el.lat, lon: el.lon, distance };
+          const distance = haversine(lat, lon, elLat, elLon);
+          return { name, address, lat: elLat, lon: elLon, distance };
         })
+        .filter(Boolean)
         .sort((a, b) => a.distance - b.distance)
         .slice(0, 10);
       setPharmacies(results);
