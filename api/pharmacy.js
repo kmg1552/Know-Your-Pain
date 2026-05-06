@@ -4,7 +4,7 @@ const OVERPASS_MIRRORS = [
   'https://overpass.openstreetmap.ru/api/interpreter',
 ];
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Content-Type', 'application/json');
 
@@ -63,4 +63,4 @@ export default async function handler(req, res) {
     console.error('Handler error:', error.name, error.message);
     return res.status(500).json({ error: error.message });
   }
-}
+};

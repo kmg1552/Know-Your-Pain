@@ -1,5 +1,14 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "functions": {
+    "api/pharmacy.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "rewrites": [
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
+    { "source": "/api/pharmacy", "destination": "/api/pharmacy" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
