@@ -67,10 +67,11 @@ export default function PharmacyFinderScreen() {
     }
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        const { latitude, longitude } = pos.coords;
-        setUserCoords({ lat: latitude, lon: longitude });
+        const userLat = parseFloat(pos.coords.latitude);
+        const userLon = parseFloat(pos.coords.longitude);
+        setUserCoords({ lat: userLat, lon: userLon });
         setStatus('searching');
-        fetchPharmacies(latitude, longitude);
+        fetchPharmacies(userLat, userLon);
       },
       () => {
         setStatus('denied');
@@ -80,24 +81,19 @@ export default function PharmacyFinderScreen() {
 
   async function fetchPharmacies(lat, lon) {
     try {
-      const res = await fetch(`/api/pharmacy?lat=${lat}&lon=${lon}&radius=5000`);
+      const res = await fetch(`/api/pharmacy?lat=${lat}&lon=${lon}`);
       const data = await res.json();
       if (data.error) throw new Error(data.error);
-      const results = (data.elements || [])
-        .map((el) => {
-          const elLat = el.lat ?? el.center?.lat;
-          const elLon = el.lon ?? el.center?.lon;
-          if (elLat == null || elLon == null) return null;
-          const name = el.tags?.name || 'Pharmacy';
-          const street = el.tags?.['addr:street'] || '';
-          const number = el.tags?.['addr:housenumber'] || '';
-          const address = street ? `${number} ${street}`.trim() : null;
-          const distance = haversine(lat, lon, elLat, elLon);
-          return { name, address, lat: elLat, lon: elLon, distance };
-        })
-        .filter(Boolean)
-        .sort((a, b) => a.distance - b.distance)
-        .slice(0, 10);
+      const places = data.places || [];
+      const results = places
+        .map((place) => ({
+          name: place.displayName?.text || 'Unknown Pharmacy',
+          address: place.formattedAddress || 'Address not available',
+          lat: place.location.latitude,
+          lon: place.location.longitude,
+          distance: haversine(lat, lon, place.location.latitude, place.location.longitude),
+        }))
+        .sort((a, b) => a.distance - b.distance);
       setPharmacies(results);
       setStatus('done');
     } catch {

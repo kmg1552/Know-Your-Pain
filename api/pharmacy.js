@@ -4,42 +4,47 @@ module.exports = async function handler(req, res) {
 
   try {
     const { searchParams } = new URL(req.url, 'http://localhost');
-    const lat = searchParams.get('lat');
-    const lon = searchParams.get('lon');
-    const radius = searchParams.get('radius') || 5000;
+    const lat = parseFloat(searchParams.get('lat'));
+    const lon = parseFloat(searchParams.get('lon'));
 
-    if (!lat || !lon) {
-      return res.status(400).json({ error: 'lat and lon required' });
+    if (isNaN(lat) || isNaN(lon)) {
+      return res.status(400).json({ error: 'Valid lat and lon are required' });
     }
 
-    const query = `[out:json][timeout:8];(node["amenity"="pharmacy"](around:${radius},${lat},${lon});way["amenity"="pharmacy"](around:${radius},${lat},${lon}););out center;`;
+    const apiKey = process.env.GOOGLE_PLACES_API_KEY;
+    if (!apiKey) {
+      return res.status(500).json({ error: 'API key not configured' });
+    }
 
-    const MIRRORS = [
-      'https://overpass.kumi.systems/api/interpreter',
-      'https://overpass.openstreetmap.ru/api/interpreter',
-      'https://maps.mail.ru/osm/tools/overpass/api/interpreter'
-    ];
-
-    const fetchMirror = (url) => {
-      const controller = new AbortController();
-      setTimeout(() => controller.abort(), 8000);
-      return fetch(url, {
+    const response = await fetch(
+      'https://places.googleapis.com/v1/places:searchNearby',
+      {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'data=' + encodeURIComponent(query),
-        signal: controller.signal
-      }).then(res => {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        return res.json();
-      });
-    };
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Goog-Api-Key': apiKey,
+          'X-Goog-FieldMask': 'places.displayName,places.formattedAddress,places.location'
+        },
+        body: JSON.stringify({
+          includedTypes: ['pharmacy'],
+          maxResultCount: 10,
+          locationRestriction: {
+            circle: {
+              center: { latitude: lat, longitude: lon },
+              radius: 5000.0
+            }
+          }
+        })
+      }
+    );
 
-    try {
-      const data = await Promise.any(MIRRORS.map(fetchMirror));
-      return res.status(200).json(data);
-    } catch (err) {
-      return res.status(502).json({ error: 'All mirrors failed: ' + err.message });
+    if (!response.ok) {
+      const err = await response.text();
+      return res.status(502).json({ error: 'Google API error: ' + err });
     }
+
+    const data = await response.json();
+    return res.status(200).json(data);
 
   } catch (err) {
     return res.status(500).json({ error: err.message });
