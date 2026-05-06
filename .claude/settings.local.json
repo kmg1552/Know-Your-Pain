@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ' *)",
+      "Read(//c/Users/kmg15/.claude/projects/c--Users-kmg15-OneDrive-Documents-4811-Know-Your-Pain/**)",
+      "Bash(python3)",
+      "Read(//c/Users/kmg15/Downloads/**)",
+      "Bash(node -e ' *)",
+      "Bash(node -e \" const chunks = []; process.stdin.on\\('data', c => chunks.push\\(c\\)\\); process.stdin.on\\('end', \\(\\) => { const line = chunks.join\\(''\\); try { const obj = JSON.parse\\(line\\); const content = obj?.message?.content || []; content.forEach\\(c => { if \\(c.type === 'text'\\) { // Print the part after STEP 6 const text = c.text; const idx = text.indexOf\\('back-upper-back'\\); if \\(idx > 0\\) console.log\\(text.substring\\(idx, idx + 5000\\)\\); } }\\); } catch\\(e\\) { console.log\\('err', e.message\\); } }\\); \")",
+      "Bash(npx vite *)"
+    ]
+  }
+}

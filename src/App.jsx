@@ -9,6 +9,7 @@ import PainScaleScreen from './screens/PainScaleScreen';
 import RecommendationScreen from './screens/RecommendationScreen';
 import PositiveReinforcementScreen from './screens/PositiveReinforcementScreen';
 import MyResultsScreen from './screens/MyResultsScreen';
+import PharmacyFinderScreen from './screens/PharmacyFinderScreen';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -23,6 +24,7 @@ function AnimatedRoutes() {
         <Route path="/positive-reinforcement" element={<PositiveReinforcementScreen />} />
         <Route path="/recommendation" element={<RecommendationScreen />} />
         <Route path="/my-results" element={<MyResultsScreen />} />
+        <Route path="/pharmacy-finder" element={<PharmacyFinderScreen />} />
       </Routes>
     </PageTransition>
   );

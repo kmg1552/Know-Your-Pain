@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from 'react';
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
+  const [layoutMode, setLayoutMode] = useState('desktop');
   const [selectedBodyPart, setSelectedBodyPartState] = useState(null);
   const [selectedBodyLabel, setSelectedBodyLabel] = useState(null);
   const [selectedZoomPart, setSelectedZoomPartState] = useState(null);
@@ -44,6 +45,8 @@ export function AppProvider({ children }) {
   return (
     <AppContext.Provider
       value={{
+        layoutMode,
+        setLayoutMode,
         selectedBodyPart,
         selectedBodyLabel,
         selectedZoomPart,

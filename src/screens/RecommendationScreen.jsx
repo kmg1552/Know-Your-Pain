@@ -333,6 +333,24 @@ export default function RecommendationScreen() {
             🔄 Start Over
           </button>
 
+          {/* ── Find Nearby Pharmacy button ── */}
+          <button
+            onClick={() => navigate('/pharmacy-finder')}
+            style={{
+              width: '100%',
+              padding: '16px',
+              borderRadius: '14px',
+              border: '2px solid #1565C0',
+              backgroundColor: '#fff',
+              color: '#1565C0',
+              fontSize: '16px',
+              fontWeight: '800',
+              cursor: 'pointer',
+            }}
+          >
+            📍 Find My Nearest Pharmacy
+          </button>
+
         </div>
       </ScreenLayout>
     </>

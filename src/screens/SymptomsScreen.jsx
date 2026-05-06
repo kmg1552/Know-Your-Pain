@@ -43,6 +43,9 @@ export default function SymptomsScreen() {
     ];
   }
 
+  const patientSymptoms = symptoms.filter(s => !s.image || !s.image.includes('/carer-'));
+  const carerSymptoms   = symptoms.filter(s =>  s.image &&  s.image.includes('/carer-'));
+
   const locationLabel = selectedZoomLabel || selectedBodyLabel || 'Body';
 
   function handleBack() {
@@ -64,10 +67,10 @@ export default function SymptomsScreen() {
     >
       {/* Title */}
       <div style={{ textAlign: 'center', marginBottom: '12px' }}>
-        <h2 style={{ fontSize: '22px', fontWeight: '800', color: '#0D47A1' }}>
+        <h2 style={{ fontSize: '24px', fontWeight: '800', color: '#0D47A1' }}>
           What do you feel? 😔
         </h2>
-        <p style={{ fontSize: '16px', color: '#555', marginTop: '6px', lineHeight: '1.5' }}>
+        <p style={{ fontSize: '18px', color: '#555', marginTop: '6px', lineHeight: '1.5' }}>
           Tap everything that feels right. You can choose more than one.
         </p>
       </div>
@@ -78,22 +81,17 @@ export default function SymptomsScreen() {
           backgroundColor: '#1565C0',
           color: '#fff',
           borderRadius: '50px',
-          padding: '6px 18px',
-          fontSize: '15px',
+          padding: '8px 20px',
+          fontSize: '18px',
           fontWeight: '700',
         }}>
           📍 {locationLabel}
         </div>
       </div>
 
-      {/* Symptom grid — 2 columns */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(2, 1fr)',
-        gap: '12px',
-        marginBottom: '16px',
-      }}>
-        {symptoms.map((symptom) => (
+      {/* Patient symptom grid — 2 col mobile, 3 col tablet, 4 col desktop */}
+      <div className="kyp-symptom-grid" style={{ marginBottom: '16px' }}>
+        {patientSymptoms.map((symptom) => (
           <BigButton
             key={symptom.id}
             emoji={symptom.icon}
@@ -105,8 +103,29 @@ export default function SymptomsScreen() {
         ))}
       </div>
 
+      {/* Carer section */}
+      {carerSymptoms.length > 0 && (
+        <>
+          <p style={{ fontSize: '22px', fontWeight: 700, color: '#2471A3', margin: '28px 0 12px 0', paddingTop: '20px', borderTop: '2px solid #D0E8F5' }}>
+            For Carer: Please choose your observations.
+          </p>
+          <div className="kyp-symptom-grid" style={{ marginBottom: '16px' }}>
+            {carerSymptoms.map((symptom) => (
+              <BigButton
+                key={symptom.id}
+                emoji={symptom.icon}
+                image={symptom.image}
+                label={symptom.label}
+                selected={selectedSymptoms.includes(symptom.id)}
+                onClick={() => toggleSymptom(symptom.id)}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
       {/* Helper note */}
-      <p style={{ textAlign: 'center', fontSize: '14px', color: '#aaa' }}>
+      <p style={{ textAlign: 'center', fontSize: '18px', color: '#aaa' }}>
         Can't find the right word? That's okay. Just tap Next.
       </p>
     </ScreenLayout>

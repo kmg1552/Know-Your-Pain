@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppContext } from '../context/AppContext';
 
 const floatKeyframes = `
   @keyframes float {
@@ -15,6 +16,7 @@ const floatKeyframes = `
 
 export default function HomeScreen() {
   const navigate = useNavigate();
+  const { layoutMode, setLayoutMode } = useAppContext();
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
@@ -177,6 +179,26 @@ export default function HomeScreen() {
             ⚕️ Always talk to a pharmacist or doctor if you are not sure.
           </p>
         </div>
+
+        {/* Layout toggle — bottom-right corner */}
+        <button
+          onClick={() => setLayoutMode(layoutMode === 'desktop' ? 'mobile' : 'desktop')}
+          style={{
+            position: 'absolute',
+            bottom: '16px',
+            right: '16px',
+            background: 'rgba(255,255,255,0.15)',
+            color: 'white',
+            border: '1px solid rgba(255,255,255,0.3)',
+            borderRadius: '20px',
+            padding: '6px 14px',
+            fontSize: '14px',
+            cursor: 'pointer',
+            zIndex: 10,
+          }}
+        >
+          {layoutMode === 'desktop' ? '🖥️ Desktop' : '📱 Mobile'}
+        </button>
       </div>
     </>
   );

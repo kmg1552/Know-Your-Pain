@@ -6,6 +6,7 @@ export default function BigButton({ emoji, image, label, selected, onClick }) {
   return (
     <button
       onClick={onClick}
+      className="kyp-bigbtn"
       style={{
         background: selected ? '#EFF6FF' : 'white',
         border: selected ? '2.5px solid #1565C0' : '2.5px solid #E2E8F0',
@@ -14,11 +15,10 @@ export default function BigButton({ emoji, image, label, selected, onClick }) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: '8px',
+        gap: '10px',
         cursor: 'pointer',
         minHeight: '160px',
         width: '100%',
-        transition: 'all 0.15s ease',
         position: 'relative',
       }}
     >
@@ -31,39 +31,32 @@ export default function BigButton({ emoji, image, label, selected, onClick }) {
           background: '#1565C0',
           color: 'white',
           borderRadius: '50%',
-          width: '20px',
-          height: '20px',
+          width: '24px',
+          height: '24px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontSize: '12px',
+          fontSize: '13px',
           fontWeight: 'bold',
         }}>✓</div>
       )}
 
       {/* Image or emoji */}
-      <div style={{
-        width: '120px',
-        height: '120px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
+      <div className="kyp-bigbtn-media">
         {image && !imgError ? (
           <img
             src={image}
             alt={label}
             onError={() => setImgError(true)}
-            style={{ width: '120px', height: '120px', objectFit: 'contain' }}
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
           />
         ) : (
-          <span style={{ fontSize: '64px', lineHeight: 1 }}>{emoji}</span>
+          <span className="kyp-bigbtn-emoji">{emoji}</span>
         )}
       </div>
 
       {/* Label */}
-      <span style={{
-        fontSize: '14px',
+      <span className="kyp-bigbtn-label" style={{
         fontWeight: '700',
         color: selected ? '#1565C0' : '#1A202C',
         textAlign: 'center',

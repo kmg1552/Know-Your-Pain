@@ -7,13 +7,237 @@
 }
 
 body {
-  background-color: #F0F4F8;
+  background-color: #ffffff;
   font-family: system-ui, sans-serif;
   min-height: 100vh;
 }
 
 #root {
-  max-width: 480px;
   min-height: 100vh;
+}
+
+/* ── Responsive layout helpers used by ScreenLayout ── */
+
+.kyp-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Mobile: single-column, full-width */
+.kyp-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.kyp-main {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+}
+
+.kyp-bottom-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  background: #fff;
+  border-top: 1px solid #e0e0e0;
+  padding: 12px 16px;
+  display: flex;
+  gap: 12px;
+}
+
+.kyp-sidebar {
+  display: none;
+}
+
+/* Tablet: centred, max 700px */
+@media (min-width: 640px) {
+  body {
+    background-color: #ffffff;
+  }
+  #root {
+    max-width: 700px;
+    margin: 0 auto;
+    box-shadow: 0 0 40px rgba(0,0,0,0.10);
+    background: #ffffff;
+  }
+  .kyp-main {
+    padding: 24px 28px;
+  }
+  .kyp-bottom-bar {
+    padding: 14px 28px;
+  }
+}
+
+/* Desktop: two-panel, max 1100px */
+@media (min-width: 1024px) {
+  #root {
+    max-width: 1100px;
+  }
+  .kyp-body {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .kyp-sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    min-width: 220px;
+    background: #1565C0;
+    padding: 32px 20px;
+    gap: 12px;
+  }
+  .kyp-main {
+    padding: 32px 40px;
+  }
+  /* On desktop the bottom bar sits below the right-side content column */
+  .kyp-right-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .kyp-bottom-bar {
+    padding: 16px 40px;
+  }
+}
+
+/* ── BodyMapSVG responsive sizing ──
+   viewBox="0 0 160 320" → aspect ratio 1:2.
+   Controlling width controls height proportionally (width × 2 = height).
+   140px wide → 280px tall (mobile target).
+   Width-driven scaling is reliable across all browsers for SVG.        */
+.kyp-body-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 280px;
   margin: 0 auto;
+}
+@media (min-width: 640px) {
+  .kyp-body-svg { max-width: 360px; }
+}
+@media (min-width: 1024px) {
+  .kyp-body-svg { max-width: 420px; }
+}
+
+/* ── BigButton hover / responsive ── */
+
+.kyp-bigbtn {
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+.kyp-bigbtn:hover:not(:disabled) {
+  background-color: #EFF6FF !important;
+  border-color: #1565C0 !important;
+  transform: translateY(-2px);
+}
+.kyp-bigbtn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.kyp-bigbtn-media {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.kyp-bigbtn-emoji {
+  font-size: 56px;
+  line-height: 1;
+}
+.kyp-bigbtn-label {
+  font-size: 18px;
+}
+
+@media (min-width: 640px) {
+  .kyp-bigbtn-media {
+    width: 120px;
+    height: 120px;
+  }
+  .kyp-bigbtn-emoji {
+    font-size: 64px;
+  }
+  .kyp-bigbtn-label {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .kyp-bigbtn-media {
+    width: 130px;
+    height: 130px;
+  }
+  .kyp-bigbtn-emoji {
+    font-size: 72px;
+  }
+  .kyp-bigbtn-label {
+    font-size: 20px;
+  }
+}
+
+/* On desktop the sidebar has its own Back button — hide it in the bottom bar */
+@media (min-width: 1024px) {
+  .kyp-hide-on-desktop {
+    display: none !important;
+  }
+  /* Hide the progress bar strip — sidebar handles steps */
+  .kyp-progress-bar-wrap {
+    display: none;
+  }
+}
+
+/* ── Symptom grid ── */
+.kyp-symptom-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+@media (min-width: 640px) {
+  .kyp-symptom-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+@media (min-width: 1024px) {
+  .kyp-symptom-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}
+
+/* ── Nav button hover states ── */
+.kyp-btn-back:hover {
+  background-color: #CFD8DC !important;
+}
+.kyp-btn-next:hover:not(:disabled) {
+  background-color: #0D47A1 !important;
+}
+.kyp-btn-next:disabled {
+  cursor: not-allowed;
+}
+
+/* ── Layout toggle: mobile mode overrides ── */
+.kyp-mobile .kyp-sidebar  { display: none !important; }
+.kyp-mobile .kyp-body     { flex-direction: column !important; }
+.kyp-mobile .kyp-main     { max-width: 480px; margin: 0 auto; width: 100%; }
+
+/* ── Pharmacy Finder Screen ── */
+.pharmacy-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  border: 1px solid #E2E8F0;
+}
+
+.pharmacy-map-container {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
 }

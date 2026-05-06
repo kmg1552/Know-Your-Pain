@@ -14,9 +14,9 @@ const cssKeyframes = `
 // ZOOM IMAGES — maps selectedBodyPart → image file path
 // ─────────────────────────────────────────────────────────────
 const zoomImages = {
-  'head':            '/images/body-zoomin-head.JPG',
-  'head-back':       '/images/body-zoomin-head.JPG',
-  'chest':           '/images/body-zoomin-chest.JPG',
+  'head':            '/images/body-zoomin-head.png',
+  'head-back':       '/images/body-zoomin-head.png',
+  'chest':           '/images/body-zoomin-chest.png',
   'left-arm':        '/images/body-zoomin-arm.JPG',
   'right-arm':       '/images/body-zoomin-arm.JPG',
   'left-leg':        '/images/body-zoomin-leg.JPG',
@@ -32,12 +32,13 @@ const zoomImages = {
 // ─────────────────────────────────────────────────────────────
 const zoomParts = {
 
-  // HEAD (front) — face at top ~60%, 4 equal boxes in bottom 40%
+  // HEAD (front) — calibrated to image container
   head: [
-    { id: 'eyes',  label: 'Eyes',  top: '60.6%', left: '11.4%', width: '18.3%', height: '26.8%' },
-    { id: 'nose',  label: 'Nose',  top: '60.6%', left: '34.6%', width: '13.4%', height: '26.8%' },
-    { id: 'mouth', label: 'Mouth', top: '60.6%', left: '52.7%', width: '13.8%', height: '26.8%' },
-    { id: 'ears',  label: 'Ears',  top: '60.6%', left: '70.8%', width: '16.7%', height: '26.8%' },
+    { id: 'head',  label: 'Head',  top: '58.7%', left: '7.5%',  width: '13.8%', height: '16.1%' },
+    { id: 'eyes',  label: 'Eyes',  top: '58.7%', left: '24.9%', width: '14.6%', height: '16.1%' },
+    { id: 'nose',  label: 'Nose',  top: '58.7%', left: '42.9%', width: '16.0%', height: '16.1%' },
+    { id: 'mouth', label: 'Mouth', top: '58.7%', left: '61.1%', width: '13.8%', height: '16.1%' },
+    { id: 'ears',  label: 'Ears',  top: '58.7%', left: '78.8%', width: '13.7%', height: '16.1%' },
   ],
 
   // HEAD (back) — approximate regions on the same head image
@@ -47,10 +48,11 @@ const zoomParts = {
     { id: 'temple-right',  label: 'Right Temple',  top: '25%', left: '70%', width: '17%', height: '25%' },
   ],
 
-  // CHEST — Lungs box left, Heart box right
+  // CHEST — calibrated to image container
   chest: [
-    { id: 'lungs', label: 'Lungs', top: '20%', left: '2%',  width: '30%', height: '55%' },
-    { id: 'heart', label: 'Heart', top: '20%', left: '68%', width: '30%', height: '55%' },
+    { id: 'left',   label: 'Left',   top: '56.7%', left: '6.9%',  width: '24.6%', height: '18.2%' },
+    { id: 'middle', label: 'Middle', top: '56.7%', left: '36.5%', width: '25.8%', height: '18.2%' },
+    { id: 'right',  label: 'Right',  top: '56.7%', left: '67.3%', width: '26.0%', height: '18.2%' },
   ],
 
   // ARM — 3 boxes top row, 2 boxes bottom row
@@ -128,17 +130,17 @@ export default function BodyZoomScreen() {
       >
         {/* Title */}
         <div style={{ textAlign: 'center', marginBottom: '12px' }}>
-          <h2 style={{ fontSize: '22px', fontWeight: '800', color: '#0D47A1' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: '800', color: '#0D47A1' }}>
             Select where it hurts on the{' '}
             <span style={{ color: '#00796B' }}>{selectedBodyLabel || 'body'}</span>
           </h2>
-          <p style={{ fontSize: '15px', color: '#555', marginTop: '4px' }}>
+          <p style={{ fontSize: '18px', color: '#555', marginTop: '4px' }}>
             Tap the exact area that hurts.
           </p>
         </div>
 
         {/* Selection tag */}
-        <div style={{ minHeight: '36px', display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+        <div style={{ minHeight: '40px', display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
           {selectedPartData && (
             <div
               key={selectedZoomPart}
@@ -147,8 +149,8 @@ export default function BodyZoomScreen() {
                 color: '#1565C0',
                 border: '2px solid #1565C0',
                 borderRadius: '50px',
-                padding: '6px 18px',
-                fontSize: '16px',
+                padding: '8px 20px',
+                fontSize: '18px',
                 fontWeight: '700',
                 boxShadow: '0 2px 8px rgba(21,101,192,0.2)',
                 animation: 'tagFadeIn 0.25s ease-out forwards',
@@ -162,14 +164,13 @@ export default function BodyZoomScreen() {
         {/* Image + transparent button overlay */}
         {/* paddingBottom sets container height to match the image's natural aspect ratio */}
         <div
-          style={{ position: 'relative', width: '100%', paddingBottom: '75%' }}
+          style={{ position: 'relative', width: '100%', maxWidth: '500px', margin: '0 auto', paddingBottom: '75%' }}
         >
           <img
             src={imageSrc}
             alt={`Zoom of ${selectedBodyLabel || 'body part'}`}
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain' }}
           />
-
           {parts.map((part) => {
             const isSelected = selectedZoomPart === part.id;
             const isHovered  = hoveredPart === part.id;
@@ -185,10 +186,8 @@ export default function BodyZoomScreen() {
                   left:            part.left,
                   width:           part.width,
                   height:          part.height,
-                  backgroundColor: isSelected
-                    ? 'rgba(147, 197, 253, 0.5)'
-                    : isHovered
-                    ? 'rgba(147, 197, 253, 0.4)'
+                  backgroundColor: (isSelected || isHovered)
+                    ? 'rgba(74, 144, 217, 0.35)'
                     : 'transparent',
                   border:          isSelected ? '2px solid rgba(21, 101, 192, 0.7)' : 'none',
                   borderRadius:    '8px',
