@@ -12,31 +12,36 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'lat and lon required' });
     }
 
-    const query = `[out:json][timeout:20];(node["amenity"="pharmacy"](around:${radius},${lat},${lon});way["amenity"="pharmacy"](around:${radius},${lat},${lon}););out center;`;
+    const query = `[out:json][timeout:8];(node["amenity"="pharmacy"](around:${radius},${lat},${lon});way["amenity"="pharmacy"](around:${radius},${lat},${lon}););out center;`;
 
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000);
+    const MIRRORS = [
+      'https://overpass.kumi.systems/api/interpreter',
+      'https://overpass.openstreetmap.ru/api/interpreter',
+      'https://maps.mail.ru/osm/tools/overpass/api/interpreter'
+    ];
 
-    const response = await fetch('https://overpass-api.de/api/interpreter', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: 'data=' + encodeURIComponent(query),
-      signal: controller.signal
-    });
+    const fetchMirror = (url) => {
+      const controller = new AbortController();
+      setTimeout(() => controller.abort(), 8000);
+      return fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'data=' + encodeURIComponent(query),
+        signal: controller.signal
+      }).then(res => {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      });
+    };
 
-    clearTimeout(timeoutId);
-
-    if (!response.ok) {
-      return res.status(502).json({ error: 'Overpass API error: ' + response.status });
+    try {
+      const data = await Promise.any(MIRRORS.map(fetchMirror));
+      return res.status(200).json(data);
+    } catch (err) {
+      return res.status(502).json({ error: 'All mirrors failed: ' + err.message });
     }
-
-    const data = await response.json();
-    return res.status(200).json(data);
 
   } catch (err) {
-    if (err.name === 'AbortError') {
-      return res.status(504).json({ error: 'Request timed out' });
-    }
     return res.status(500).json({ error: err.message });
   }
 };
